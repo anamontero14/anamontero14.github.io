@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<form action="https://www.w3schools.com/action_page.php" method="post">
+
+		<fieldset>
+			
+			<legend>Información de la receta</legend>
+
+			<label for="nombre">Nombre de la receta: </label>
+			<input type="text" name="nombre"><br><br>
+
+			<label for="email">Email: </label>
+			<input type="email" name="email"><br><br>
+
+			<label>Momento para comer: </label>
+			<input type="checkbox" name="momentocomer" value="desayunar">Desayunar
+			<input type="checkbox" name="momentocomer" value="almuerzo">Almuerzo
+			<input type="checkbox" name="momentocomer" value="merendar">Merendar
+			<input type="checkbox" name="momentocomer" value="cenar">Cenar<br><br>
+
+			<label>Ingredientes</label>
+			<select name="Ingredientes">
+				<option></option>
+				<optgroup label="Carne">
+
+					<option>De pollo</option>
+					<option>De vaca</option>
+					<option>De cerdo</option>
+
+				</optgroup>
+
+				<optgroup label="Pescado">
+					
+					<option>Salmón</option>
+					<option>Cazón</option>
+					<option>Chipirón</option>
+
+				</optgroup>
+
+				<optgroup label="Verdura">
+					
+					<option>Lechuga</option>
+					<option>Berenjena</option>
+					<option>Pepino</option>
+
+				</optgroup>
+
+				<optgroup label="Fruta">
+					
+					<option>Manzana</option>
+					<option>Naranja</option>
+					<option>Plátano</option>
+
+				</optgroup>
+
+			</select><br><br>
+
+			<label>Tiempo de preparación aproximado: </label><br><br>
+			<input type="radio" name="horas" value="0h">0h
+			<input type="radio" name="horas" value="1h">1h
+			<input type="radio" name="horas" value="2h">2h<br><br>
+			<input type="radio" name="minutos" value="0min">0 minutos
+			<input type="radio" name="minutos" value="15min">15 minutos
+			<input type="radio" name="minutos" value="30min">30 minutos
+			<input type="radio" name="minutos" value="45min">45 minutos
+
+		</fieldset><br>
+		 <input type="submit" name="enviar" value="Enviar">
+	</form>
+
+</body>
+</html>
