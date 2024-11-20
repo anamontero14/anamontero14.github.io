@@ -45,7 +45,8 @@ a:hover {
 }
 
 img {
-	width: 50%;
+	width: 100px;
+	margin: 12px;
 	border: solid skyblue 5px;
 	box-shadow: 5px 5px 5px 5px rgba(32,32,32,0.3);
 }
@@ -71,12 +72,17 @@ footer {
 	
 }
 
-.inicioIMG {
-	display: inline-block;
-	width: 200px;
-}
-
 .sobremiIMG {
 	display: inline-block;
 	width: -200px;
+}
+
+#inicioIMG {
+	width: 97%;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	border-radius: 30px;
 }
