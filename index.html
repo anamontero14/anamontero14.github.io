@@ -1,31 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="mi_estilo" href="mi_estilo.css">
-
-
-	<title>anamontero14 índice</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="mi_estilo" href="mi_estilo.css">
+    <title>anamontero14 índice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+          crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-opacity-25">
+        <h1 class="ms-3">ACTIVIDADES</h1>
+    </nav>
+    
+    <ul>
+        <li>
+            <a href="./web/html/actividad1">Actividad 1, cajas con estilo</a>
+        </li>
+        <li>
+            <a href="./web/html/actividad2">Actividad 2, cajas con imagen de fondo repetidas</a>
+        </li>
+        <li>
+            <a href="./webEjercicios/inicio.html">Actividad página web con cabecera y varias páginas</a>
+        </li>
+    </ul>
 
-	<div class="bg-primary bs-primary-bg-subtle">
-	<h1 class="ms-3">ACTIVIDADES</h1>
-	<hr>
+<div class="w-50 row text-center d-flex">
+	<div class="justify-content-center align-items-center">
+	    <div id="carouselExampleCaptions" class="carousel slide">
+	        <div class="carousel-indicators">
+	            <button type="button" 
+	                    data-bs-target="#carouselExampleCaptions" 
+	                    data-bs-slide-to="0" 
+	                    class="active" 
+	                    aria-current="true" 
+	                    aria-label="Slide 1">
+	            </button>
+	            <button type="button" 
+	                    data-bs-target="#carouselExampleCaptions" 
+	                    data-bs-slide-to="1" 
+	                    aria-label="Slide 2">
+	            </button>
+	            <button type="button" 
+	                    data-bs-target="#carouselExampleCaptions" 
+	                    data-bs-slide-to="2" 
+	                    aria-label="Slide 3">
+	            </button>
+	        </div>
+	        <div class="carousel-inner">
+	            <div class="carousel-item active">
+	                <img src="./img/uno.png" class="d-block w-100" alt="...">
+	                <div class="carousel-caption d-none d-md-block">
+	                    <h5>Actividad 1, cajas con estilo</h5>
+	                    <button class="btn btn-primary"><a href="./web/html/actividad1.html">Ver más</a></button>
+	                </div>
+	            </div>
+	            <div class="carousel-item">
+	                <img src="./img/dos.png" class="d-block w-100" alt="...">
+	                <div class="carousel-caption d-none d-md-block">
+	                    <h5>Actividad 2, cajas con imagen de fondo repetidas</h5>
+	                    <button class="btn btn-primary"><a href="./web/html/actividad2.html">Ver más</a></button>
+	                </div>
+	            </div>
+	            <div class="carousel-item">
+	                <img src="./img/tres.png" class="d-block w-100" alt="...">
+	                <div class="carousel-caption d-none d-md-block">
+	                    <h5>Actividad página web con cabecera y varias páginas</h5>
+	                    <button class="btn btn-primary"><a href="./webEjercicios/inicio.html">Ver más</a></button>
+	                </div>
+	            </div>
+	        </div>
+	        <button class="carousel-control-prev" 
+	                type="button" 
+	                data-bs-target="#carouselExampleCaptions" 
+	                data-bs-slide="prev">
+	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Previous</span>
+	        </button>
+	        <button class="carousel-control-next" 
+	                type="button" 
+	                data-bs-target="#carouselExampleCaptions" 
+	                data-bs-slide="next">
+	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Next</span>
+	        </button>
+	    </div>
 	</div>
-		
-		<ul>
-			<li><a href="./web/actividad1">Actividad 1, cajas con estilo</a></li>
-			<li><a href="./web/actividad2">Actividad 2, cajas con imagen de fondo repetidas</a></li>
-			<li><a href="./webEjercicios/inicio.html">Actividad página web con cabezera y varias páginas</a></li>
-		</ul>
+</div>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous">
+    </script>
 </body>
 </html>
