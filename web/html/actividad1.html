@@ -1,194 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Actividad 1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Actividad 1</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-
-<style type="text/css">
-
-a {
-	color: white;
-}
-
-.p1 {
-	text-align: right;
-	text-decoration: none;
-	text-transform: none;
-	font-size: 100%;
-	font-family: ;
-	font-style: italic;
-	font-weight: normal;
-	text-shadow: none;
-}
-	
-.p2 {
-	text-align: left;
-	text-decoration: line-through;
-	text-transform: uppercase;
-	font-size: 100%;
-	font-family: ;
-	font-style: normal;
-	font-weight: normal;
-	text-shadow: none;
-}
-
-.p3 {
-	text-align: left;
-	text-decoration: none;
-	text-transform: none;
-	font-size: 120%;
-	font-family: Verdana;
-	font-style: normal;
-	font-weight: normal;
-	text-shadow: none;
-}
-
-.p4 {
-	text-align: left;
-	text-decoration: none;
-	text-transform: none;
-	font-size: 100%;
-	font-family: ;
-	font-style: normal;
-	font-weight: bold;
-	text-shadow: -4px 3px 5px green;
-}
-
-#buscadores {
-	background-color: #c6d591;
-	width: 400px;
-	height: 200px;
-	display: inline-block;
-	border-radius: 10px;
-	margin-right: -4px;
-	position: relative;
-	top: -80px;
-}
-
-#redes-sociales {
-	background-color: #91d5c6;
-	width: 400px;
-	height: 200px;
-	display: inline-block;
-	border-radius: 10px;
-	margin-right: -5px;
-}
-
-#noticias {
-	background-color: #c691d5;
-	width: 400px;
-	height: 200px;
-	display: inline-block;
-	border-radius: 10px;
-	position: relative;
-	top: -100px;
-}
-
-#duckduckgo {
-	background-color: #8b0000;
-	width: 100px;
-	height: 50px;
-	display: inline-block;
-	color: white;
-}
-
-#ecosia {
-	background-color: #006400;
-	width: 100px;
-	height: 50px;
-	display: inline-block;
-	color: white;
-}
-
-#google {
-	background-color: #00008b;
-	width: 100px;
-	height: 50px;
-	display: inline-block;
-	color: white;
-}
-
-#facebook {
-	background-color: #8b0000;
-	width: 100px;
-	height: 50px;
-	display: block;
-	color: white;
-}
-
-#twitter {
-	background-color: #006400;
-	width: 100px;
-	height: 50px;
-	display: block;
-	color: white;
-}
-
-#pinterest {
-	background-color: #00008b;
-	width: 100px;
-	height: 50px;
-	display: block;
-	color: white;
-}
-
-#el-pais {
-	color: white;
-	display: inline-block;
-	text-transform: capitalize;
-}
-
-#el-diario, #el-mundo {
-	color: white;
-	display: inline-block;
-	text-transform: capitalize;
-}
-
-</style>
-
 <body>
 
-<h1>CSS: Ejercicio 1</h1>
+<div class="my-4 ms-4 me-4">
+    <h1 >CSS: Ejercicio 1</h1>
 
-<p class="p1">Este es el párrafo número 1 en cursiva y alineado a la derecha</p>
+    <p class="text-end fst-italic">Este es el párrafo número 1 en cursiva y alineado a la derecha</p>
+    <p class="text-decoration-line-through text-uppercase">este es un párrafo en minúsculas pero convertido en mayúsculas y tachado</p>
+    <p class="fs-4" style="font-family: Verdana;">Como no hay dos sin tres, este será el tercero con un tipo de letra diferente y un 20% más grande</p>
+    <p class="fw-bold" style="text-shadow: -4px 3px 5px green;">Y por último, un texto en negrita y con sombrita en verde</p>
 
-<p class="p2">este es un párrafo en minúsculas pero convertido en mayúsculas y tachado</p>
+    <hr>
 
-<p class="p3">
-Como no hay dos sin tres, este será el tercero con un tipo de letra diferente y un 20% más grande</p>
+    <div class="d-flex flex-wrap">
+       
+        <div class="rounded-3 p-3 mb-3" style="width: 400px; height: 200px; background-color: #c6d591;">
+            <p>Buscadores:</p>
+            <div class="d-flex justify-content-evenly mt-3">
+                <a href="https://duckduckgo.com/" class="btn btn-danger">DuckDuckGo</a>
+                <a href="https://www.ecosia.org/?c=es" class="btn btn-success">Ecosia</a>
+                <a href="https://www.google.com/?hl=es" class="btn btn-primary">Google</a>
+            </div>
+        </div>
 
-<p class="p4">Y por último, un texto en negrita y con sombrita en verde</p>
+        <div class="rounded-3 p-3" style="width: 400px; height: 200px; background-color: #91d5c6;">
+            <p>Redes sociales:</p>
+            <div class="d-flex flex-column gap-2 mt-3 text-start">
+                <a href="https://www.facebook.com/?locale=es_ES" class="btn btn-danger btn-sm" style="width: 100px;">Facebook</a>
+                <a href="https://twitter.com/?lang=es" class="btn btn-success btn-sm" style="width: 100px;">Twitter</a>
+                <a href="https://es.pinterest.com/" class="btn btn-primary btn-sm" style="width: 100px;">Pinterest</a>
+            </div>
+        </div>
 
-<hr>
-
-<div id="buscadores">
-	<p>Buscadores:</p>
-	<br>
-	<div id="duckduckgo"><a href="https://duckduckgo.com/">DuckDuckGo</a></div>
-	<div id="ecosia"><a href="https://www.ecosia.org/?c=es">Ecosia</a></div>
-	<div id="google"><a href="https://www.google.com/?hl=es">Google</a></div>
-
+        <div class="rounded-3 p-3 mb-3" style="width: 400px; height: 200px; background-color:#c691d5;">
+            <p>Noticias:</p>
+            <div class="d-flex justify-content-evenly mt-3">
+                <a href="https://elpais.com/" class="text-white text-capitalize btn btn-dark">el país</a>
+                <a href="https://www.eldiario.es/" class="text-white text-capitalize btn btn-dark">el diario</a>
+                <a href="https://www.elmundo.es/" class="text-white text-capitalize btn btn-dark">el mundo</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="redes-sociales">
-	<p>Redes sociales:</p>
-
-	<div id="facebook"><a href="https://www.facebook.com/?locale=es_ES">Facebook</a></div>
-	<div id="twitter"><a href="https://twitter.com/?lang=es">Twitter</a></div>
-	<div id="pinterest"><a href="https://es.pinterest.com/">Pinterest</a></div>
-
-</div>
-
-<div id="noticias">
-	<p>Redes sociales:</p>
-
-	<div id="el-pais"><a href="https://elpais.com/">el país</a></div>
-	<div id="el-diario"><a href="https://www.eldiario.es/">el diario</a></div>
-	<div id="el-mundo"><a href="https://www.elmundo.es/">el mundo</a></div>
-
-</div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
