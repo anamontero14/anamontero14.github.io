@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ejercicio 1 objetos</title>
+</head>
+<body>
+
+	
+
+</body>
+	
+	<script>
+
+	let obj = {nombre: "Ana",apellidos: "Montero",edad: "18",ciudad: "Sevilla"};
+
+	json_serializado = serializar(obj);
+	obj_recuperado = deserializar(json_serializado);
+
+	console.log(json_serializado);
+	console.log(obj_recuperado);
+
+	function serializar(obj){
+		return JSON.stringify(obj)
+	}
+
+	function deserializar(objJson) {
+		return JSON.parse(objJson)
+	}
+
+	</script>
+
+</html>

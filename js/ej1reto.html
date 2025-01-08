@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ejercicio 1 objetos</title>
+</head>
+<body>
+
+	<table border="1">
+		
+		<thead>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Edad</th>
+			<th>Ciudad</th>
+		</thead>
+
+		<tbody>
+			<td id="nombre"></td>
+			<td id="apellido"></td>
+			<td id="edad"></td>
+			<td id="ciudad"></td>
+		</tbody>
+
+	</table>
+
+	<script>
+
+		let objeto = {nombre: "Ana",apellidos: "Montero",edad: "18",ciudad: "Sevilla"};
+
+		obj_des = deserializar(objeto);
+
+		console.log(obj_des);
+
+		function deserializar(objJson){
+			return JSON.parse(objJson)
+		}
+
+	</script>
+
+</body>
+</html>

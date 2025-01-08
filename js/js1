@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Prueba JS 1</title>
+</head>
+<body>
+
+	<h2>Mira la consola</h2>
+
+	<p>
+		<button onclick="ej1()">Ejercicio 1</button>
+		<button onclick="ej2()">Ejercicio 2</button>
+		<button onclick="ej3()">Ejercicio 3</button>
+		<button onclick="ej8()">Ejercicio 8</button>
+		<button onclick="ej9()">Ejercicio 9</button>
+		<button onclick="ej10()">Ejercicio 10</button>
+	</p>
+
+	<script type="text/javascript">
+
+		function ej1() {
+
+			//Declara una variable con tu nombre y otra con tu edad
+
+			var nombre = 'Ana';
+			const edad = 18;
+
+			let mensaje = "Hola mi nombre es " + nombre + " y tengo " + edad + " años.";
+			console.log(mensaje);
+
+			//Declara dos números y calcula
+			const num1 = 2;
+			const num2 = 3;
+
+			console.log("Suma: " + (num1 + num2));
+			console.log("Resta: " + (num2 - num1));
+			console.log("Multiplicación: " + (num1 * num2));
+			console.log("División: " + (num1 / num2))
+		}
+
+		function ej2() {
+
+			//Escribe un programa que indique si es par o impar un número asignado a una variable
+
+			//variable
+			const num = 5;
+
+			//variable para la edad
+			const edad = 18;
+
+			//si el nº dividido entre 2 es 0 es par
+			if ((num%2) == 0) {
+				alert("El número es par")
+			} else {
+				alert("El número es impar")
+			}
+
+			//Escribe un programa que tome la edad de una persona y diga si puede votar (mayores de 18 años) o no
+
+			//si tiene menos de 18 no puede
+			if (edad >= 18) {
+				console.log("Puede votar")
+			} else {
+				console.log("No puede votar")
+			}
+
+			//Escribe un bucle que imprima los números del 1 al 10
+			for ( let i = 1; i <= 10; i++){
+				console.log(i);
+			}
+
+			//Crea un programa que sume los números del 1 al 100 y muestre el resultado
+			let suma = 0;
+
+			for (let i = 0; i <= 100; i++) {
+				suma += i;
+				console.log(suma);
+			}
+
+
+		}
+
+		function ej3() {
+
+			//Crea una función llamada saludar que reciba un nombre como parámetro y devuelva el mensaje: "Hola, [nombre]"
+
+			//funcion
+			function saludar(nombre) {
+				return "Hola " + nombre;
+			}	
+
+			//inicializar el nombre
+			var nombre = "Juan";
+
+			//almacenar la funcion
+			var mensaje = saludar(nombre);
+
+			//mostrar la funcion almacenada en una variable
+			console.log(mensaje);
+
+			//Escribe una función que reciba dos números como parámetros y devuelva su promedio
+
+			let num1 = 8;
+			let num2 = 4;
+
+			let media = 0;
+
+			media = (num1 + num2) / 2;
+
+			console.log(media);
+
+			/*Crea una función que reciba un número como parámetro y devuelva:
+			"Positivo" si es mayor que 0.
+			"Negativo" si es menor que 0.
+			"Cero" si es 0.
+			*/
+
+			let num = prompt("Dime un número");
+
+			if (num > 0) {
+				console.log("Positivo");
+			} else if (num < 0) {
+				console.log("Negativo");
+			} else {
+				console.log("Cero");
+			}
+
+			//Escribe una función que reciba un año como parámetro y devuelva si es un año bisiesto
+
+			let año = prompt("Dame un año");
+
+			if ((año % 4) == 0) {
+
+				if ((año % 100) == 0 ){
+
+					if ((año % 400) == 0) {
+						console.log("El año es bisiesto");
+					} else {
+						console.log("El año no es bisiesto");
+					}
+
+				} else {
+					console.log("El año es bisiesto");
+				}
+			}
+
+		}
+
+		function ej8() {
+
+			//Realizar un algoritmo que pida el nombre de una persona. Si el dato entra vacío, debe pedir nuevamente al usuario que introduzca su nombre (“No ha introducido ningún nombre”)
+
+			var nombre = prompt("¿Cuál es tu nombre?");
+
+			while (nombre == ""){
+				console.log("Debe introducir un nombre.");
+
+				nombre = prompt("¿Cuál es tu nombre?");
+			}
+
+			console.log("Tu nombre es " + nombre);
+
+		}
+
+		function ej9() {
+
+			let num = prompt("Introduzca un número");
+
+			if ((num%2) == 0) {
+				alert("El número es par");
+			} else {
+				alert("El número es impar")
+			}
+
+		}
+
+		function ej10() {
+
+			let peliculaElegida = prompt(
+				"Elige tu película favorita de la siguiente lista:\n" +
+				"1. El Señor de los Anillos\n" +
+				"2. Harry Potter\n" +
+				"3. Star Wars\n" +
+				"4. Matrix\n" +
+				"5. Inception"
+				);
+
+			switch (peliculaElegida) {
+			case "1":
+				document.write(`
+					<h2>Su ticket ha sido emitido</h2>
+					<p>Has elegido: El Señor de los Anillos</p>
+					<img src="https://via.placeholder.com/200x300?text=El+Señor+de+los+Anillos" alt="El Señor de los Anillos">
+					`);
+				break;
+
+			case "2":
+				document.write(`
+					<h2>Su ticket ha sido emitido</h2>
+					<p>Has elegido: Harry Potter</p>
+					<img src="https://via.placeholder.com/200x300?text=Harry+Potter" alt="Harry Potter">
+					`);
+				break;
+
+			case "3":
+				document.write(`
+					<h2>Su ticket ha sido emitido</h2>
+					<p>Has elegido: Star Wars</p>
+					<img src="https://via.placeholder.com/200x300?text=Star+Wars" alt="Star Wars">
+					`);
+				break;
+
+			case "4":
+				document.write(`
+					<h2>Su ticket ha sido emitido</h2>
+					<p>Has elegido: Matrix</p>
+					<img src="https://via.placeholder.com/200x300?text=Matrix" alt="Matrix">
+					`);
+				break;
+
+			case "5":
+				document.write(`
+					<h2>Su ticket ha sido emitido</h2>
+					<p>Has elegido: Inception</p>
+					<img src="https://via.placeholder.com/200x300?text=Inception" alt="Inception">
+					`);
+				break;
+
+			default:
+				document.write(`
+					<h2>No has elegido una opción válida</h2>
+					<p>Por favor, recarga la página e intenta de nuevo.</p>
+					`);
+				break;}
+			}
+
+		</script>
+
+	</body>
+	</html>
