@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ejercicio 2</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+	<h1>Ejercicio 2 formulario interactivo</h1>
+
+	<input type="text" id="primero" placeholder="Nombre">
+	<input type="text" id="segundo" placeholder="Apellido">
+	<input type="text" id="tercero" placeholder="Edad">
+	<input type="text" id="cuarto" placeholder="Ciudad">
+
+	<button onclick="enviarDatos()">Pulsa para enviar a la tabla</button>
+
+	<br><br>
+
+	<table border="1">
+		
+		<thead>
+			
+			<th id="nombre">Nombre</th>
+			<th id="apellido">Apellido</th>
+			<th id="edad">Edad</th>
+			<th id="ciudad">Ciudad</th>
+
+		</thead>
+
+		<tbody>
+			
+		</tbody>
+
+	</table>
+
+</body>
+
+<script type="text/javascript">
+
+	function enviarDatos() {
+	
+	let objeto = {
+
+		primero: $("#primero").val(),
+		segundo: $("#segundo").val(),
+		tercero: $("#tercero").val(),
+		cuarto: $("#cuarto").val()
+
+	};
+
+	objetoSerializado = serializar(objeto);
+	objetoDeserializado = deserializar(objetoSerializado);
+
+	let nuevaFila = "<tr>" + 
+	"<td>" + objetoDeserializado.primero + "</td>"
+	+ "<td>" + objetoDeserializado.segundo + "</td>"
+	+ "<td>" + objetoDeserializado.tercero + "</td>"
+	+ "<td>" + objetoDeserializado.cuarto + "</td>" + "</tr>";
+
+	$("table tbody").append(nuevaFila);
+
+	$("#primero, #segundo, #tercero, #cuarto").val("");
+
+	}
+
+	function serializar (obj) {
+		return JSON.stringify(obj)
+	}
+
+	function deserializar (objJson) {
+		return JSON.parse(objJson)
+	}
+
+</script>
+
+</html>

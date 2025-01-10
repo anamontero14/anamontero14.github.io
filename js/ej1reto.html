@@ -7,6 +7,8 @@
 </head>
 <body>
 
+	<h1>Ejemplo 1, tabla + JS</h1>
+
 	<table border="1">
 		
 		<thead>
@@ -17,25 +19,39 @@
 		</thead>
 
 		<tbody>
+
+		<tr>
 			<td id="nombre"></td>
 			<td id="apellido"></td>
 			<td id="edad"></td>
 			<td id="ciudad"></td>
+		</tr>
+
 		</tbody>
 
 	</table>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script>
 
-		let objeto = {nombre: "Ana",apellidos: "Montero",edad: "18",ciudad: "Sevilla"};
+		let objeto = {nombre: "Ana",apellido: "Montero",edad: "18",ciudad: "Sevilla"};
 
-		obj_des = deserializar(objeto);
+		obj_ser = serializar(objeto);
+		obj_des = deserializar(obj_ser);
 
-		console.log(obj_des);
+		function serializar (obj){
+			return JSON.stringify(obj)
+		}
 
 		function deserializar(objJson){
 			return JSON.parse(objJson)
 		}
+
+		$("#nombre").text(obj_des.nombre);
+		$("#apellido").text(obj_des.apellido);
+		$("#edad").text(obj_des.edad);
+		$("#ciudad").text(obj_des.ciudad);
 
 	</script>
 
