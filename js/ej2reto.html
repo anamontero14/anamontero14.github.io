@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejercicio 2 RETO</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Ejercicio 2 formulario interactivo versión RETO</h1>
+
+    <input type="text" id="primero" placeholder="Nombre">
+    <input type="text" id="segundo" placeholder="Apellido">
+    <input type="text" id="tercero" placeholder="Edad">
+    <input type="text" id="cuarto" placeholder="Ciudad">
+
+    <button type="button" id="enviar" onclick="">Pulsa para enviar a la tabla</button>
+
+    <br><br>
+
+    <table border="1">
+        <thead>
+            <th id="nombre">Nombre</th>
+            <th id="apellido">Apellido</th>
+            <th id="edad">Edad</th>
+            <th id="ciudad">Ciudad</th>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+
+    <p></p>
+
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#enviar").click(function () {
+
+            let objeto = {
+                primero: $("#primero").val(),
+                segundo: $("#segundo").val(),
+                tercero: $("#tercero").val(),
+                cuarto: $("#cuarto").val()
+            };
+
+            if (!objeto.primero || !objeto.segundo || !objeto.tercero || !objeto.cuarto) {
+                //alerta
+                alert("Todos los datos son obligatorios");
+            } else {
+
+                objetoSerializado = serializar(objeto);
+                objetoDeserializado = deserializar(objetoSerializado);
+
+                let nuevaFila = "<tr>" +
+                    "<td>" + objetoDeserializado.primero + "</td>"
+                    + "<td>" + objetoDeserializado.segundo + "</td>"
+                    + "<td>" + objetoDeserializado.tercero + "</td>"
+                    + "<td>" + objetoDeserializado.cuarto + "</td>" + "</tr>";
+
+                $("table tbody").append(nuevaFila);
+
+                $("#primero, #segundo, #tercero, #cuarto").val("");
+
+                //eliminacion de la linea
+                $("tr").click(function () {
+                    this.remove();
+                });
+
+                //let parrafo = objeto.tercero += objeto.tercero;
+                let suma = 0;
+
+                //mostrar las sumas de las edades
+                $("p").append(function () {
+
+                    suma += Number(objeto.tercero);
+
+                    alert(suma);
+
+                })
+            }
+        });
+
+
+
+        function serializar(obj) {
+            return JSON.stringify(obj)
+        };
+
+        function deserializar(objJson) {
+            return JSON.parse(objJson)
+        };
+
+    });
+
+</script>
+
+</html>
