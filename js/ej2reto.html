@@ -32,12 +32,20 @@
 
     </table>
 
-    <p></p>
+    <p> Suma total de edades: <span id="suma">0 <br>
+            Media total de las edades: <span id="media">0 <br>
+                Máximo total de las edades: <span id="maximo">0 <br>
+                    Mínimo total de las edades: <span id="minimo">0 <br>
+    </p>
 
 </body>
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        let suma = 0;
+        let media = 0;
+        let contador = 0;
 
         $("#enviar").click(function () {
 
@@ -63,29 +71,32 @@
                     + "<td>" + objetoDeserializado.cuarto + "</td>" + "</tr>";
 
                 $("table tbody").append(nuevaFila);
+                contador++;
 
                 $("#primero, #segundo, #tercero, #cuarto").val("");
 
                 //eliminacion de la linea
                 $("tr").click(function () {
                     this.remove();
+                    contador--;
                 });
 
-                //let parrafo = objeto.tercero += objeto.tercero;
-                let suma = 0;
+                // let parrafo = objeto.tercero += objeto.tercero;
+                let edad = Number(objetoDeserializado.tercero);
 
-                //mostrar las sumas de las edades
-                $("p").append(function () {
+                suma += Number(edad);
+                media = suma / contador;
 
-                    suma += Number(objeto.tercero);
+                // mostrar las sumas de las edades
+                $("p").text(function () {
 
-                    alert(suma);
+                    suma.append();
+                    media.text();
 
-                })
+                });
+                 
             }
         });
-
-
 
         function serializar(obj) {
             return JSON.stringify(obj)
