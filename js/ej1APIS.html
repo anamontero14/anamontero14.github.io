@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Ejercicio perros APIS</title>
+</head>
+
+<body>
+
+    <!--Botón aleatorio-->
+    <button name="aleatorio" type="button" onclick="solicitudPERROIMAGEN()">Aleatorio</button>
+
+    <!--Selector-->
+    <select name="select">
+        <option value=""></option>
+    </select>
+
+    <!--Imagen vacía-->
+    <img src="" height="500px" width="500px">
+
+</body>
+
+<script>
+
+    //recibir con jquery
+    function solicitudPERROIMAGEN() {
+        $.get("https://dog.ceo/api/breeds/image/random")
+            .done(function (data) {
+                $("img").attr("src", data.message);
+            })
+            .fail(function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            });
+    }
+
+    //recibir con jquery
+    function solicitud() {
+
+        $.get("https://dog.ceo/api/breeds/list/all")
+            .done(function (data) {
+
+                let select = $("select");
+
+                for (let raza in data.message) {
+                    let nuevaOpcion = `<option>${raza}</option>`;
+                    select.append(nuevaOpcion);
+                }
+
+            })
+            .fail(function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            });
+    }
+
+</script>
+
+</html>

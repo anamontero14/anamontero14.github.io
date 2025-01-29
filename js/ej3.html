@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+
+    <!--6 botones 3 de envio de informacion y 3 de recibir informacion y cada uno que lleve a su funcion-->
+    <!--enviar GET-->
+    <button type="button" id="XM" onclick="envioXM()">Envío con XMLHttpRequest</button> <br>
+    <button type="button" id="AJ" onclick="envioAJ()">Envío con AJAX</button> <br>
+    <button type="button" id="QRY" onclick="envioQRY()">Envío con JQuery</button> <br>
+    <br>
+    <br>
+    <!--recibir POST-->
+    <button type="button" id="XM" onclick="solicitudXM()">Recepción con XMLHttpRequest</button> <br>
+    <button type="button" id="AJ" onclick="solicitudAJ()">Recepción con AJAX</button> <br>
+    <button type="button" id="QRY" onclick="solicitudQRY()">Recepción con JQuery</button> <br>
+
+</body>
+<script>
+
+    //ENVÍO CON XMLHTTPREQUEST
+    function envioXM(objeto_js) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://jsonplaceholder.typicode.com/posts");
+        xhr.responseType = "json"; // Si no se indica, necesitará parseo
+
+        // Preparamos a continuación la respuesta
+        xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == 201) { // 200 || 201
+                console.log(xhr.response);
+            } else {
+                console.log("Error: ${xhr.status}");
+            }
+        };
+        xhr.send(JSON.stringify(objeto_js));
+    }
+
+    //RECEPCIÓN CON XMLHTTPREQUEST
+    function solicitudXM() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
+        xhr.responseType = "json"; // Si no se indica, necesitará parseo
+
+        // Preparamos a continuación la recepción
+        xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const data = xhr.response;
+                console.log(data);
+            } else {
+                console.log("Error: ${xhr.status}");
+            }
+        };
+        xhr.send();
+    }
+
+    //ENVÍO CON AJAX
+    function envioAJ(objeto_js) {
+        $.ajax({
+            url: "https://jsonplaceholder.typicode.com/posts",
+            method: "POST",
+            data: JSON.stringify(objeto_js),
+            contentType: "application/json", // Especifica el tipo de contenido
+            dataType: "json", // La respuesta será interpretada como JSON
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    //RECEPCIÓN CON AJAX
+    function solicitudAJ() {
+        $.ajax({
+            url: "https://jsonplaceholder.typicode.com/users",
+            method: "GET",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    //ENVÍO CON JQUERY
+    function envioQRY(objeto_js) {
+        $.post("https://jsonplaceholder.typicode.com/posts",
+            JSON.stringify(objeto_js),
+            function (response) {
+                console.log(response);
+            },
+            "json"
+        )
+            .fail(function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            });
+    }
+
+    //RECEPCIÓN CON JQUERY
+    function solicitudQRY() {
+        $.get("https://jsonplaceholder.typicode.com/users")
+            .done(function (data) {
+                console.log(data);
+            })
+            .fail(function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            });
+    }
+
+
+</script>
+
+</html>
