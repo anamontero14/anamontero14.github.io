@@ -18,74 +18,64 @@
         <input id="ciudad" name="ciudad" type="text">
         <button type="button" id="enviar">Enviar</button>
     </form>
-
-    <form>
-
-        <fieldset>
-
-            <legend>Hobbies</legend>
-            <input type="checkbox" name="hobbies" value="Deporte"> Deporte
-            <input type="checkbox" name="hobbies" value="Lectura"> Lectura
-            <input type="checkbox" name="hobbies" value="Música"> Música
-            <input type="checkbox" name="hobbies" value="Juegos"> Juegos
-            <input type="checkbox" name="hobbies" value="Cine"> Cine
-            <input type="checkbox" name="hobbies" value="Teatro"> Teatro
-            <input type="checkbox" name="hobbies" value="Coleccionismo"> Coleccionismo
-            <input type="checkbox" name="hobbies" value="Bricolaje"> Bricolaje
-            <input type="checkbox" name="hobbies" value="Cosplay"> Cosplay
-
-        </fieldset>
-
-    </form>
-
     <div id="tabla"></div>
     <div id="resultados"></div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         lista = [];
 
-        let hobbiesSeleccionados = [];
-
-        function obtenerHobbies() {
-            return $('input[name="hobbies"]:checked')
-                .map(function () {
-                    return $(this).val(); // Obtiene el valor del hobby seleccionado
-                }).get();
-        }
-
-        //creacion de la lista
         $("#enviar").click(function () {
             let nombre = $("#nombre").val();
             let apellidos = $("#apellidos").val();
             let edad = $("#edad").val();
             let ciudad = $("#ciudad").val();
-            let hobbiesSeleccionados = obtenerHobbies();
             let obj = {
                 "nombre": nombre,
                 "apellidos": apellidos,
                 "edad": edad,
-                "ciudad": ciudad,
-                "hobbies": hobbiesSeleccionados,
-            };
-
+                "ciudad": ciudad
+            }
             lista.push(obj);
             simulacro();
         });
 
-        //serializa y deserializa
         function simulacro() {
-            let lista_serializada = serializar(lista);
-            let lista_NOserializada = deserializar(lista_serializada)
+            let lista_serializada = envio(lista);
+            let lista_NOserializada = solicitud(lista_serializada)
             generaTabla(lista_NOserializada);
         }
 
-        function serializar(objeto) {
-            return JSON.stringify(objeto);
+        function envio(objeto) {
+            $.post("https://lm.iesnervion.es/eco.php",
+                JSON.stringify(objeto),
+                function (response) {
+                    console.log(response);
+                },
+                "json"
+            )
+                .fail(function (xhr, status, error) {
+                    console.log(`Error: ${xhr.status} - ${error}`);
+                });
         }
 
-        function deserializar(objJson) {
-            return JSON.parse(objJson);
+        function solicitud() {
+            $.get("https://lm.iesnervion.es/eco.php")
+                .done(function (data) {
+                    console.log(data);
+                })
+                .fail(function (xhr, status, error) {
+                    console.log(`Error: ${xhr.status} - ${error}`);
+                });
         }
+
+
+        /*function serializar(objeto) {
+            return JSON.stringify(objeto);
+        }*/
+
+        /*function deserializar(objJson) {
+            return JSON.parse(objJson);
+        }*/
 
         function creaTabla() {
             let tabla = "<table border='1' id='tabla_datos'>" +
@@ -95,7 +85,6 @@
                 "<th>Apellidos</th>" +
                 "<th>Edad</th>" +
                 "<th>Ciudad</th>" +
-                "<th>Hobbies</th>" +
                 "</tr>" +
                 "</thead>";
             tabla += "<tbody id='cuerpo'></tbody>";
@@ -104,8 +93,7 @@
         }
 
         function nuevafila(obj, idObjeto) {
-            return "<tr id='" + idObjeto + "' onclick='eliminarTR(this.id)'><td>" + obj.nombre + "</td><td>" + obj.apellidos + "</td><td>" + obj.edad + "</td><td>" + obj.ciudad + "</td>"
-                + "<td>" + obj.hobbies.join(', ') + "</td>" + "</tr >";
+            return "<tr id='" + idObjeto + "' onclick='eliminarTR(this.id)'><td>" + obj.nombre + "</td><td>" + obj.apellidos + "</td><td>" + obj.edad + "</td><td>" + obj.ciudad + "</td></tr>";
         }
 
         function eliminarTR(idTR) {
