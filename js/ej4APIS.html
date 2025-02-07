@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 APIS JSON</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <form>
+
+        <fieldset>
+            <label>ID</label>
+            <input id="id" name="id" type="number">
+            <label>Descripción</label>
+            <input id="descripcion" name="descripcion" type="textarea">
+            <label>ID del proveedor</label>
+            <input id="idProveedor" name="idProveedor" type="number">
+            <label>Precio</label>
+            <input id="precio" name="precio" type="number">
+
+            <!--botón para enviar los datos a la api-->
+            <button type="button" id="enviar">Enviar</button>
+
+        </fieldset>
+
+    </form>
+
+    <!--div para insertar ahí la tabla-->
+    <div id="tabla"></div>
+
+</body>
+
+<script>
+
+    //creo un objeto para almacenar ahi la tabla
+    let listaTabla = [];
+
+    //cuando se haga click se crea la lista
+    $("#enviar").click(function () {
+        let id = $("id").val();
+        let descripcion = $("descripcion").val();
+        let idProveedor = $("idProveedor").val();
+        let preio = $("precio").val();
+
+        //creo un objeto donde almaceno todas esas variables
+        let objeto = {
+            "id": id,
+            "descripcion": descripcion,
+            "idProveedor": idProveedor,
+            "precio": precio
+        };
+
+        //le hago un push a la tabla
+        listaTabla.push(objeto);
+
+        //llama a la funcion para enviar las cosas a la api
+        enviar_recibir();
+    })
+
+    //funcion para serializar, deserializar y mandar a la api
+    function enviar_recibir() {
+        //meto lo demas en una funcion porque primero el ajax tiene que acabar de ejecutarse
+        envioAPI(listaTabla, function () {
+            solicitudAPI(function (lista_NOserializada) {
+                añadir_tabla(lista_NOserializada);
+            })
+
+        })
+    }
+
+    //envío la tabla a la api y la funcion me la serializa
+    function envioAPI(objeto) {
+        $.ajax({
+            url: "https://lm.iesnervion.es/reto4.php",
+            method: "POST",
+            data: JSON.stringify(objeto),
+            contentType: "application/json", // Especifica el tipo de contenido
+            dataType: "json", // La respuesta será interpretada como JSON
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    function solicitudAPI(objeto) {
+        $.ajax({
+            url: "https://lm.iesnervion.es/reto4.php",
+            method: "GET",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    //funcion para crear la tabla
+    function crearTabla() {
+        let tabla = "<table border='1' id='tabla_datos'>" +
+            "<thead>" +
+            "<tr>" +
+            "<th>ID</th>" +
+            "<th>Descripción</th>" +
+            "<th>Id del proveedor</th>" +
+            "<th>Precio</th>" +
+            "</tr>" +
+            "</thead>";
+        tabla += "<tbody id='cuerpo'></tbody>";
+        tabla += "</table>";
+        return tabla
+    }
+
+    //funcion para crear una nueva fila
+    function nuevafila(objeto, idObjeto) {
+        return "<tr id='" + idObjeto + "' onclick='eliminarTR(this.id)'><td>" + objeto.id + "</td><td>" + objeto.descripcion + "</td><td>" + objeto.idProveedor + "</td><td>" + objeto.precio + "</td>"
+            + "</tr >";
+    }
+
+</script>
+
+</html>
