@@ -6,47 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 4 APIS JSON</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Estilo para mostrar el error en rojo */
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
     <form>
-
         <fieldset>
             <label>ID</label>
             <input id="id" name="id" type="number">
             <label>Descripción</label>
-            <input id="descripcion" name="descripcion" type="textarea">
+            <input id="descripcion" name="descripcion" type="text">
             <label>ID del proveedor</label>
             <input id="idProveedor" name="idProveedor" type="number">
             <label>Precio</label>
             <input id="precio" name="precio" type="number">
 
-            <!--botón para enviar los datos a la api-->
+            <!-- Botón para enviar los datos a la API -->
             <button type="button" id="enviar">Enviar</button>
-
         </fieldset>
-
     </form>
 
-    <!--div para insertar ahí la tabla-->
+    <div id="titulo"></div>
+    <!-- Div para insertar ahí la tabla -->
     <div id="tabla"></div>
 
 </body>
 
 <script>
 
-    //creo un objeto para almacenar ahi la tabla
+    // Creamos un objeto para almacenar la tabla
     let listaTabla = [];
 
-    //cuando se haga click se crea la lista
+    // Cuando se haga clic en "Enviar"
     $("#enviar").click(function () {
-        let id = $("id").val();
-        let descripcion = $("descripcion").val();
-        let idProveedor = $("idProveedor").val();
-        let preio = $("precio").val();
+        let id = $("#id").val();
+        let descripcion = $("#descripcion").val();
+        let idProveedor = $("#idProveedor").val();
+        let precio = $("#precio").val();
 
-        //creo un objeto donde almaceno todas esas variables
+        // Verificamos si todos los campos están completos
+        if (!id || !descripcion || !idProveedor || !precio) {
+            $("#titulo").html("<h2 class='error'>Todos los campos son obligatorios.</h2>");
+            return;
+        }
+
+        // Creamos un objeto con los datos del formulario
         let objeto = {
             "id": id,
             "descripcion": descripcion,
@@ -54,57 +65,67 @@
             "precio": precio
         };
 
-        //le hago un push a la tabla
+        // Añadimos el objeto a la lista
         listaTabla.push(objeto);
 
-        //llama a la funcion para enviar las cosas a la api
-        enviar_recibir();
-    })
+        // Llamamos a la función para enviar los datos a la API
+        enviarAAPI(objeto);
+    });
 
-    //funcion para serializar, deserializar y mandar a la api
-    function enviar_recibir() {
-        //meto lo demas en una funcion porque primero el ajax tiene que acabar de ejecutarse
-        envioAPI(listaTabla, function () {
-            solicitudAPI(function (lista_NOserializada) {
-                añadir_tabla(lista_NOserializada);
-            })
+    // Función para enviar los datos a la API
+    function enviarAAPI(objeto) {
+        console.log("Enviando objeto a la API:", objeto);
 
-        })
-    }
-
-    //envío la tabla a la api y la funcion me la serializa
-    function envioAPI(objeto) {
         $.ajax({
-            url: "https://lm.iesnervion.es/reto4.php",
+            url: "https://lm.iesnervion.es/reto4.php",  // URL de la API
             method: "POST",
-            data: JSON.stringify(objeto),
-            contentType: "application/json", // Especifica el tipo de contenido
-            dataType: "json", // La respuesta será interpretada como JSON
+            data: JSON.stringify(objeto),  // Convertimos el objeto a JSON
+            contentType: "application/json",  // Tipo de contenido que estamos enviando
+            dataType: "json",  // Tipo de datos que esperamos recibir
             success: function (response) {
-                console.log(response);
+                console.log("Respuesta de la API:", response);
+
+                // Verificamos si la respuesta tiene un error
+                if (response.error) {
+                    $("#titulo").html("<h2 class='error'>" + response.error + "</h2>");
+                } else {
+                    // Si la respuesta es correcta, mostramos los productos
+                    $("#titulo").html("<h2>Datos enviados correctamente</h2>");
+                    solicitudAPI();
+                }
             },
             error: function (xhr, status, error) {
-                console.log(`Error: ${xhr.status} - ${error}`);
+                console.log(`Error al enviar los datos: ${xhr.status} - ${error}`);
+                $("#titulo").html("<h2 class='error'>Error al enviar los datos a la API.</h2>");
             }
         });
     }
 
-    function solicitudAPI(objeto) {
+    // Función para solicitar los datos de la API
+    function solicitudAPI() {
         $.ajax({
-            url: "https://lm.iesnervion.es/reto4.php",
+            url: "https://lm.iesnervion.es/reto4.php",  // URL de la API para obtener los datos
             method: "GET",
-            dataType: "json", // Convierte la respuesta a objeto JSON 
-            success: function (data) { //200 o 201
-                console.log(data);
+            dataType: "json",  // Esperamos respuesta en formato JSON
+            success: function (data) {
+                console.log("Datos obtenidos de la API:", data);
+
+                if (Array.isArray(data)) {
+                    // Si los datos son un array, mostramos la tabla
+                    crearTabla(data);
+                } else {
+                    $("#titulo").html("<h2 class='error'>Error al obtener los productos.</h2>");
+                }
             },
             error: function (xhr, status, error) {
-                console.log(`Error: ${xhr.status} - ${error}`);
+                console.log(`Error al obtener datos: ${xhr.status} - ${error}`);
+                $("#titulo").html("<h2 class='error'>Error al obtener los productos de la API.</h2>");
             }
         });
     }
 
-    //funcion para crear la tabla
-    function crearTabla() {
+    // Función para crear la tabla con los datos obtenidos
+    function crearTabla(lista) {
         let tabla = "<table border='1' id='tabla_datos'>" +
             "<thead>" +
             "<tr>" +
@@ -113,16 +134,30 @@
             "<th>Id del proveedor</th>" +
             "<th>Precio</th>" +
             "</tr>" +
-            "</thead>";
-        tabla += "<tbody id='cuerpo'></tbody>";
-        tabla += "</table>";
-        return tabla
+            "</thead><tbody>";
+
+        // Creamos una fila por cada objeto en la lista
+        lista.forEach((objeto, index) => {
+            tabla += nuevafila(objeto, index);
+        });
+
+        tabla += "</tbody></table>";
+        $("#tabla").html(tabla);
     }
 
-    //funcion para crear una nueva fila
+    // Función para crear una nueva fila en la tabla
     function nuevafila(objeto, idObjeto) {
-        return "<tr id='" + idObjeto + "' onclick='eliminarTR(this.id)'><td>" + objeto.id + "</td><td>" + objeto.descripcion + "</td><td>" + objeto.idProveedor + "</td><td>" + objeto.precio + "</td>"
-            + "</tr >";
+        return `<tr id="${idObjeto}" onclick="eliminarTR(${idObjeto})">
+                <td>${objeto.id}</td>
+                <td>${objeto.descripcion}</td>
+                <td>${objeto.idProveedor}</td>
+                <td>${objeto.precio}</td>
+            </tr>`;
+    }
+
+    // Función para eliminar una fila de la tabla
+    function eliminarTR(id) {
+        $("#" + id).remove();
     }
 
 </script>
