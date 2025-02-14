@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 4 APIS JSON</title>
+    <title>Ejercicio 4 MEGARETO APIS JSON</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Estilo para mostrar el error en rojo */
@@ -41,6 +41,8 @@
 
 <script>
 
+
+
     //creamos un objeto para almacenar la tabla
     let listaTabla = [];
 
@@ -58,28 +60,25 @@
         }
 
         // Creamos un objeto con los datos del formulario
-        let objeto = {
+        let producto = {
             "id": id,
             "descripcion": descripcion,
             "idProveedor": idProveedor,
             "precio": precio
         };
 
-        //añadir nueva fila
-        listaTabla.push(objeto);
-
         //enviar a la api
-        enviarAAPI(objeto);
+        guardarProductoApi(producto);
     });
 
     //función para enviar los datos a la API
-    function enviarAAPI(objeto) {
-        console.log("Enviando objeto a la API:", objeto);
+    function guardarProductoApi(producto) {
+        console.log("Enviando objeto a la API:", producto);
 
         $.ajax({
             url: "https://lm.iesnervion.es/reto4.php",
             method: "POST",
-            data: JSON.stringify(objeto),
+            data: JSON.stringify(producto),
             contentType: "application/json",
             dataType: "json",
             success: function (response) {
@@ -90,7 +89,7 @@
                 } else {
                     // Si la respuesta es correcta, mostramos los productos
                     $("#titulo").html("<h2>Datos enviados correctamente</h2>");
-                    solicitudAPI();
+                    cargarProductosApi();
                 }
             },
             error: function (xhr, status, error) {
@@ -101,22 +100,15 @@
     }
 
     //función para solicitar los datos de la API
-    function solicitudAPI() {
+    function cargarProductosApi() {
         $.ajax({
             url: "https://lm.iesnervion.es/reto4.php",
-            method: "POST",
+            method: "GET",
             dataType: "json",
             success: function (data) {
                 console.log("Datos obtenidos de la API:", data);
-                console.log("Esta es la lista:",data.lista);
+                console.log("Esta es la lista:", data.lista);
                 crearTabla(data.lista);
-/*                if (Array.isArray(data)) {
-                    // Si los datos son un array, mostramos la tabla
-                    crearTabla(data);
-                } else {
-                    $("#titulo").html("<h2 class='error'>Error al obtener los productos.</h2>");
-                }
-                    */
             },
             error: function (xhr, status, error) {
                 console.log(`Error al obtener datos: ${xhr.status} - ${error}`);
@@ -138,8 +130,8 @@
             "</thead><tbody>";
 
         // Creamos una fila por cada objeto en la lista
-        lista.forEach((objeto, index) => {
-            tabla += nuevafila(objeto, index);
+        lista.forEach((producto, index) => {
+            tabla += nuevafila(producto, index);
         });
 
         tabla += "</tbody></table>";
@@ -147,18 +139,31 @@
     }
 
     // Función para crear una nueva fila en la tabla
-    function nuevafila(objeto, idObjeto) {
-        return `<tr id="${idObjeto}" onclick="eliminarTR(${idObjeto})">
-                <td>${objeto.id}</td>
-                <td>${objeto.descripcion}</td>
-                <td>${objeto.idProveedor}</td>
-                <td>${objeto.precio}</td>
+    function nuevafila(producto, numFila) {
+        return `<tr id="${numFila}" onclick="eliminar(${producto.id})" <style> {cursor: pointer;}</style>>
+                <td>${producto.id}</td>
+                <td>${producto.descripcion}</td>
+                <td>${producto.idProveedor}</td>
+                <td>${producto.precio}</td>
             </tr>`;
     }
 
-    // Función para eliminar una fila de la tabla
-    function eliminarTR(id) {
-        $("#" + id).remove();
+    //funcion para eliminar fila y de la tabla
+    function eliminar(id) {
+        $.ajax({
+            url: "https://lm.iesnervion.es/reto4.php?id=" + id,
+            method: "DELETE",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+
+                //recibo de la api
+                cargarProductosApi();
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
     }
 
 </script>
