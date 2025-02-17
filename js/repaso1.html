@@ -16,8 +16,8 @@
             <input type="number" id="id" name="id">
             <label>Descripción</label>
             <input type="text" id="descripcion" name="descripcion">
-            <label>ID del proveedor</label>
-            <input type="number" id="proveedor" name="proveedor">
+            <label>ID del idProveedor</label>
+            <input type="number" id="idProveedor" name="idProveedor">
             <label>Precio</label>
             <input type="number" id="precio" name="precio">
 
@@ -44,14 +44,14 @@
         //almaceno los datos en objetos para enviarlos
         let idProducto = $("#id").val();
         let descProdudcto = $("#descripcion").val();
-        let idProveedor = $("#proveedor").val();
+        let idProveedor = $("#idProveedor").val();
         let precioProducto = $("#precio").val();
 
         //se crea un objeto con todos los campos del formulario
         let producto = {
             "id": idProducto,
             "descripcion": descProdudcto,
-            "proveedor": idProveedor,
+            "idProveedor": idProveedor,
             "precio": precioProducto
         }
 
@@ -101,7 +101,7 @@
             "<tr>" +
             "<th>ID</th>" +
             "<th>Descripcion</th>" +
-            "<th>ID Proveedor</th>" +
+            "<th>ID idProveedor</th>" +
             "<th>Precio</th>"
         "</tr>";
 
