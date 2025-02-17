@@ -140,7 +140,7 @@
 
     // Función para crear una nueva fila en la tabla
     function nuevafila(producto, numFila) {
-        return `<tr id="${numFila}" onclick="eliminar(${producto.id})" <style> {cursor: pointer;}</style>>
+        return `<tr id="${numFila}" onclick="eliminar(${producto.id})">
                 <td>${producto.id}</td>
                 <td>${producto.descripcion}</td>
                 <td>${producto.idProveedor}</td>

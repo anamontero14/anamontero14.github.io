@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <form>
+        <fieldset>
+            <label>ID</label>
+            <input type="number" id="id" name="id">
+            <label>Descripción</label>
+            <input type="text" id="descripcion" name="descripcion">
+            <label>ID del proveedor</label>
+            <input type="number" id="proveedor" name="proveedor">
+            <label>Precio</label>
+            <input type="number" id="precio" name="precio">
+
+            <br>
+            <button type="button" id="enviarBoton">Enviar</button>
+        </fieldset>
+    </form>
+
+    <br>
+
+    <!--Div para almacenar el error-->
+    <div id="titulo"></div>
+
+    <!--Div para meter aquí la tabla-->
+    <div id="divTabla"></div>
+</body>
+
+<script>
+
+    //creación del objeto donde almacenar los datos
+    let listaTabla = [];
+
+    $("#enviarBoton").click(function () {
+        //almaceno los datos en objetos para enviarlos
+        let idProducto = $("#id").val();
+        let descProdudcto = $("#descripcion").val();
+        let idProveedor = $("#proveedor").val();
+        let precioProducto = $("#precio").val();
+
+        //se crea un objeto con todos los campos del formulario
+        let producto = {
+            "id": idProducto,
+            "descripcion": descProdudcto,
+            "proveedor": idProveedor,
+            "precio": precioProducto
+        }
+
+        //le hago una llamada a la api para que guarde mi producto
+        guardarProductoApi(producto);
+    });
+
+    //funcion para enviarle los datos a la api
+    function guardarProductoApi(producto) {
+        $.ajax({
+            url: "https://lm.iesnervion.es/reto4.php",
+            method: "POST",
+            data: JSON.stringify(producto),
+            contentType: "application/json", // Especifica el tipo de contenido
+            dataType: "json", // La respuesta será interpretada como JSON
+            success: function (response) {
+                console.log(response);
+                recogerListaApi();
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+                $("#titulo").html("<h2>Error al mandar los datos</h2>");
+            }
+        });
+    }
+
+    //funcion para recoger los datos de la api
+    function recogerListaApi() {
+        $.ajax({
+            url: "https://lm.iesnervion.es/reto4.php",
+            method: "GET",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+                crearTabla(data.lista);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+                $("#titulo").html("<h2>Error al recoger los datos de la API</h2>");
+            }
+        });
+    }
+
+    //funcion para crear la tabla
+    function crearTabla(lista) {
+        let tabla = "<table border=1>" +
+            "<tr>" +
+            "<th>ID</th>" +
+            "<th>Descripcion</th>" +
+            "<th>ID Proveedor</th>" +
+            "<th>Precio</th>"
+        "</tr>";
+
+
+        //for para recorrer todas las entradas de la tabla
+        for (let index = 0; index < lista.length; index++) {
+            let producto = lista[index];
+            tabla += nuevaFila(producto, index);
+        }
+
+        tabla += "</table>";
+
+        //añado la tabla al html
+        $("#divTabla").html(tabla);
+    }
+
+    //funcion para añadir una nueva fila
+    function nuevaFila(producto, numFila) {
+        return `<tr id = "${numFila}" onclick="eliminar(${producto.id})">
+            <td>${producto.id}</td>
+            <td>${producto.descripcion}</td>
+            <td>${producto.idProveedor}</td>
+            <td>${producto.precio}</td>
+            </tr>`;
+    }
+
+</script>
+
+</html>
