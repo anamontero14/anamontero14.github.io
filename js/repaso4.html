@@ -50,6 +50,8 @@
 <script>
     $("#enviarBoton").click(function () {
 
+        let lista = [];
+
         //objeto donde almaccenar los campos
         id = $("#id").val();
         nombre = $("#nombre").val();
@@ -72,7 +74,7 @@
         return `<tr><td>${persona.id}</td> <td>${persona.nombre}</td> <td>${persona.apellido}</td> <td>${persona.edad}</td> </tr>`;
     }
 
-    $("table").on("click", "tr", function () {
+    $("table tbody").on("click", "tr", function () {
         $(this).remove();
     });
 
