@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API de perros</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <button type="button" id="aleatoria">Imagen aleatoria</button><br>
+
+    <div id="contenedorSelector"></div>
+    <br>
+
+    <img id="imagenVacia" src="" width="300" height="300">
+
+</body>
+
+<script>
+    //cuando el documento esté listo hace la llamada a la función
+    $(document).ready(function () {
+        solicitudRazas();
+    });
+
+    //creo la variable que almacenará la lista con todas las razas de perros
+    let listaRazas = [];
+
+    //funcion para llamar a la solicitud
+    $("#aleatoria").click(function () {
+        //llamo a la api
+        recogerListaApi();
+    });
+
+    //recoger la lista de todos los perros posibles
+    function recogerListaApi() {
+        $.ajax({
+            url: "https://dog.ceo/api/breeds/image/random",
+            method: "GET",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+                $("#imagenVacia").attr("src", data.message);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    //recoger las razas de los perros
+    function solicitudRazas() {
+        $.ajax({
+            url: "https://dog.ceo/api/breeds/list/all",
+            method: "GET",
+            dataType: "json", // Convierte la respuesta a objeto JSON 
+            success: function (data) { //200 o 201
+                console.log(data);
+                crearSelector(data.message);
+            },
+            error: function (xhr, status, error) {
+                console.log(`Error: ${xhr.status} - ${error}`);
+            }
+        });
+    }
+
+    //crear select
+    function crearSelector(message) {
+        let selector = "<select>"
+
+        //crear un bucle para recoger las razas
+        for (let raza in message) {
+            selector += crearOpcion(raza);
+        }
+
+        selector += "</select>"
+
+        //lo añado al html
+        $("#contenedorSelector").html(selector);
+
+    }
+
+    //crear los option
+    function crearOpcion(raza) {
+        return `<option value="${raza}">${raza}</option>`;
+    }
+
+</script>
+
+</html>
