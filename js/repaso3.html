@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso 3</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+    <!--formulario para recoger la información-->
+    <form>
+
+        <fieldset>
+            <label>Nombre</label>
+            <input id="nombre" type="text">
+            <label>Apellido</label>
+            <input id="apellido" type="text">
+            <label>Edad</label>
+            <input id="edad" type="text">
+
+            <br>
+            <button id="enviar" type="button">Enviar</button>
+            </button>
+        </fieldset>
+
+    </form>
+
+    <!--div para introducir ahí la tabla-->
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+        </tr>
+        <tbody>
+
+        </tbody>
+    </table>
+
+</body>
+<script>
+    //creacion del objeto que se serializara
+    $("#enviar").click(function () {
+        nombre = $("#nombre").val();
+        apellido = $("#apellido").val();
+        edad = $("#edad").val();
+
+        let persona = {
+            "nombre": nombre,
+            "apellido": apellido,
+            "edad": edad
+        }
+
+        //objetos que almacenen la informacion serializada y deserializada
+        serializarPersona = serializar(persona);
+        deserializarPersona = deserializar(serializarPersona);
+        $("table tbody").append(añadirFila(deserializarPersona));
+
+    });
+    //funcion de serializacion
+    function serializar(obj) {
+        return JSON.stringify(obj)
+    }
+
+    //funcion de deserializacion
+    function deserializar(objJson) {
+        console.log(objJson);
+        return JSON.parse(objJson)
+    }
+
+    //agregar una nueva fila
+    function añadirFila(persona) {
+        return "<tr>" + "<td>" + persona.nombre + "</td>" + "<td>" + persona.apellido + "</td>" + "<td>" + persona.edad + "</td>" + "</tr>";
+    }
+
+    $(document).on("click", "table tbody tr", function () {
+        $(this).remove(); // Elimina la fila en la que se hizo clic
+    });
+
+</script>
+
+</html>
