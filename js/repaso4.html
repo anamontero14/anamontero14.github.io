@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso 4</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Ejercicio de repaso 4</h1>
+
+    <!--formulario-->
+    <fieldset>
+        <form>
+            <label>ID</label>
+            <input type="number" id="id">
+            <label>Nombre</label>
+            <input type="text" id="nombre">
+            <label>Apellido</label>
+            <input type="text" id="apellido">
+            <label>Edad</label>
+            <input type="number" id="edad">
+
+            <button type="button" id="enviarBoton">Enviar</button>
+        </form>
+    </fieldset>
+
+    <br>
+
+    <table border="1">
+
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+        </tr>
+
+    </table>
+
+    <tbody>
+
+    </tbody>
+
+</body>
+
+<script>
+    $("#enviarBoton").click(function () {
+
+        //objeto donde almaccenar los campos
+        id = $("#id").val();
+        nombre = $("#nombre").val();
+        apellido = $("#apellido").val();
+        edad = $("#edad").val();
+
+        //objeto para los campos
+        let persona = {
+            id: id,
+            nombre: nombre,
+            apellido: apellido,
+            edad: edad
+        };
+
+        $("table tbody").append(añadirFila(persona));
+    });
+
+    //nueva fila
+    function añadirFila(persona) {
+        return `<tr><td>${persona.id}</td> <td>${persona.nombre}</td> <td>${persona.apellido}</td> <td>${persona.edad}</td> </tr>`;
+    }
+
+    $("table").on("click", "tr", function () {
+        $(this).remove();
+    });
+
+</script>
+
+</html>

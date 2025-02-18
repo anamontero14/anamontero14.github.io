@@ -43,6 +43,7 @@
 
 </body>
 <script>
+
     //creacion del objeto que se serializara
     $("#enviar").click(function () {
         nombre = $("#nombre").val();
@@ -55,22 +56,9 @@
             "edad": edad
         }
 
-        //objetos que almacenen la informacion serializada y deserializada
-        serializarPersona = serializar(persona);
-        deserializarPersona = deserializar(serializarPersona);
-        $("table tbody").append(añadirFila(deserializarPersona));
-
+        // Agregar la fila directamente sin serialización/deserialización
+        $("table tbody").append(añadirFila(persona));
     });
-    //funcion de serializacion
-    function serializar(obj) {
-        return JSON.stringify(obj)
-    }
-
-    //funcion de deserializacion
-    function deserializar(objJson) {
-        console.log(objJson);
-        return JSON.parse(objJson)
-    }
 
     //agregar una nueva fila
     function añadirFila(persona) {
