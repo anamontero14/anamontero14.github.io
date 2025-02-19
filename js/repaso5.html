@@ -25,9 +25,6 @@
         solicitudRazas();
     });
 
-    //creo la variable que almacenará la lista con todas las razas de perros
-    let listaRazas = [];
-
     //funcion para llamar a la solicitud
     $("#aleatoria").click(function () {
         //llamo a la api
@@ -68,7 +65,7 @@
 
     //crear select
     function crearSelector(message) {
-        let selector = "<select>"
+        let selector = `<select id="selectorRaza" onchange="seleccionarRaza()">`;
 
         //crear un bucle para recoger las razas
         for (let raza in message) {
@@ -91,8 +88,30 @@
 
     //crear los option
     function crearOpcion(raza) {
-        return `<option value="${raza}">${raza}</option>`;
+        return `<option id="opcionRaza" value="${raza}">${raza}</option>`;
     }
+
+    //seleccionar la raza
+    function seleccionarRaza() {
+
+        //almacenar la opción seleccionada en una variable
+        let razaSeleccionada = $("#selectorRaza").val();
+
+        if (razaSeleccionada) {
+            $.ajax({
+                url: `https://dog.ceo/api/breed/${razaSeleccionada}/images/random`,
+                method: "GET",
+                dataType: "json", // Convierte la respuesta a objeto JSON 
+                success: function (data) { //200 o 201
+                    $("#imagenVacia").attr("src", data.message);
+                },
+                error: function (xhr, status, error) {
+                    console.log(`Error: ${xhr.status} - ${error}`);
+                }
+            });
+        }
+    }
+
 
 </script>
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ç
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    //creacion de objeto
+    let persona = { "Nombre": "miau", "Apellido": "jiji", "Edad": "45" }
+
+    //serialización del objeto
+    jsonSerializado = serializar(persona);
+    //deserialización
+    jsonDeserializado = deserializar(jsonSerializado);
+
+    //muestro en consola el resultado
+    console.log(jsonDeserializado);
+
+    //funcion de serialización
+    function serializar(obj) {
+        return JSON.stringify(obj)
+    }
+
+    //funcion de deserializacion
+    function deserializar(objJson) {
+        return JSON.parse(objJson)
+    }
+
+
+</script>
+
+</html>
