@@ -82,6 +82,13 @@
 
     }
 
+    //FUNCION PARA CAMBIAR DE COLOR LA TABLA
+    $(document).on("change", "select", function () {
+        let raza = $(this).val();
+        console.log(raza);
+        recogerListaApi(raza);
+    });
+
     //crear los option
     function crearOpcion(raza) {
         return `<option value="${raza}">${raza}</option>`;
