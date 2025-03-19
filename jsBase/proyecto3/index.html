@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio nuevo</title>
+</head>
+
+<body>
+    <h1>EJERCICIO MEGARETO</h1>
+
+    <form>
+        <fieldset>
+            <legend>Formulario</legend>
+
+            <input type="text" id="Nombre" placeholder="Nombre">
+
+            <input type="text" id="Apellidos" placeholder="Apellidos">
+
+            <input type="number" id="Edad" placeholder="Edad">
+
+        </fieldset>
+        <button type="button" id="addDatos">Enviar datos</button>
+    </form>
+
+    <br>
+
+    <table id="Tabla" border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Edad</th>
+        </tr>
+
+        <tbody id="cuerpoTabla">
+
+            <!--aqui van los tr-->
+
+        </tbody>
+
+    </table>
+
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
+    <script>
+        //inicializar la aplicación
+        const controller = new EjercicioController();
+    </script>
+
+</body>
+
+</html>
