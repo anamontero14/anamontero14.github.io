@@ -1,4 +1,12 @@
 class Tareas {
+    constructor(id, descripcion, fecha) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+    }
+}
+
+class CRUDTareas {
 
     constructor() {
         //array
@@ -8,19 +16,13 @@ class Tareas {
     }
 
     //constructor
-    nuevaTrea(id, descripcion, fecha) {
-        //atributos
-        if (id && id >= 0) {
-            this.id = id;
-        }
+    nuevaTarea(descripcion) {
+        //objeto
+        const objetoTarea = { id: ++this.contador, descripcion, fecha: new Date() };
 
-        if (descripcion) {
-            this.descripcion = descripcion;
-        }
-
-        if (fecha) {
-            this.fecha = fecha;
-        }
+        //añado el objeto
+        this.arrayTareas.push(objetoTarea);
+        console.log("Tarea: " + objetoTarea);
     }
 
     //get de todo
@@ -108,8 +110,8 @@ class Tareas {
     //actualizar tarea
     actualizarTarea(id, descripcion, fecha) {
         let i = 0;
-        do { 
-            
+        do {
+
         } while (i = id);
     }
 }

@@ -11,22 +11,43 @@ class ViewModel {
     }
 
     render(datos) {
+        console.log("Datos para render: " + datos)
         //limpio la caja de tareas
         this.cajaDeTareas.innerHTML = '';
 
         //lista
         const ol = document.createElement('ol');
+        //let contador = 0;
 
         for (let i = 0; i < datos.length; i++) {
 
             const tarea = document.createElement('li');
 
             //añado a tarea lo que haya en el elemento seleccionado en cada iteracion
-            tarea.textContent = i;
+            tarea.textContent = datos[i].descripcion;
 
             //a la VARIABLE OL le añado LA DE TAREA
             ol.appendChild(tarea);
         };
+
+        /*while (contador < datos.length) {
+
+            const tarea = document.createElement('li');
+
+            //añado a tarea lo que haya en el elemento seleccionado en cada iteracion
+            tarea.textContent = datos[contador];
+
+            //a la VARIABLE OL le añado LA DE TAREA
+            ol.appendChild(tarea);
+
+            contador++;
+        }*/
+
+        /*datos.forEach((tarea) => {
+            const li = document.createElement('li');
+            li.textContent = tarea.descripcion; // Muestra la descripción
+            ol.appendChild(li);
+        })*/
 
         //y ahora a la caja de tareas (que es un div) LE AÑADO la OL
         this.cajaDeTareas.appendChild(ol);
@@ -37,9 +58,7 @@ class ViewModel {
 
     //funcion que servirá para eliminar lo que haya escrito en los inputs
     clearInputs() {
-        document.getElementById("id").value;
-        document.getElementById("descripcion").value;
-        document.getElementById("fecha").value;
+        document.getElementById("descripcion").value = "";
     }
 
 }
